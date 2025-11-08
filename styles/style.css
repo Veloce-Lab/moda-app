@@ -55,3 +55,44 @@ body {
     top: 0;
     left: 0;
 }
+
+/* PERMANENT INSTRUCTIONS STYLES */
+#permanentInstructions {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 999;
+    max-width: 300px;
+    backdrop-filter: blur(10px);
+}
+
+.instructions-content h3 {
+    margin: 0 0 10px 0;
+    color: #FF0000;
+}
+
+.instructions-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#hideInstructions {
+    background: #FF0000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#arStatus {
+    color: #FF0000;
+    font-weight: bold;
+}

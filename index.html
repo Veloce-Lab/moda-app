@@ -52,12 +52,18 @@
             <p>Point your camera at the test marker to experience AR</p>
             <div class="loader"></div>
             <p id="status">Initializing camera...</p>
-            <div id="markerInstructions" style="margin-top: 20px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-                <p><strong>Test Marker URLs:</strong></p>
-                <p>1. <a href="assets/images/simple-marker.html" style="color: #FF0000;" target="_blank">Open Simple Test Marker</a></p>
-                <p>2. Display that page on another device</p>
-                <p>3. Point this AR app at the black/white grid</p>
-            </div>
+        </div>
+    </div>
+
+    <!-- PERMANENT INSTRUCTIONS - Always visible -->
+    <div id="permanentInstructions">
+        <div class="instructions-content">
+            <h3>AR Instructions</h3>
+            <p><strong>Step 1:</strong> <a href="assets/images/simple-marker.html" target="_blank" style="color: #FF0000; text-decoration: underline;">Open Test Marker</a></p>
+            <p><strong>Step 2:</strong> Display that page on another device</p>
+            <p><strong>Step 3:</strong> Point this camera at the black/white grid</p>
+            <p><strong>Status:</strong> <span id="arStatus">Waiting for marker...</span></p>
+            <button id="hideInstructions">Hide Instructions</button>
         </div>
     </div>
 

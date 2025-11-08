@@ -5,17 +5,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const scene = document.querySelector('a-scene');
     const loadingScreen = document.getElementById('loadingScreen');
     const statusText = document.getElementById('status');
+    const arStatus = document.getElementById('arStatus');
     
     // Show detailed status
     statusText.innerHTML = 'Loading AR.js library...';
+    arStatus.textContent = 'Loading...';
     
     scene.addEventListener('loaded', function() {
         console.log('✅ AR Scene loaded successfully');
-        statusText.innerHTML = '✅ AR ready!<br>Open the test marker link below and point your camera at it';
+        statusText.innerHTML = '✅ AR ready!';
+        arStatus.textContent = 'Ready - Point camera at marker';
+        arStatus.style.color = '#00FF00';
         
         setTimeout(() => {
             loadingScreen.style.display = 'none';
-        }, 4000);
+        }, 2000);
     });
     
     // Marker events
@@ -23,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     marker.addEventListener('markerFound', function() {
         console.log('🎯 MARKER FOUND!');
-        statusText.innerHTML = '✅ Marker detected!<br>AR is working!';
-        statusText.style.color = '#00FF00';
+        arStatus.textContent = '✅ Marker Detected!';
+        arStatus.style.color = '#00FF00';
         
         if ('vibrate' in navigator) {
             navigator.vibrate([100, 50, 100]);
@@ -33,15 +37,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     marker.addEventListener('markerLost', function() {
         console.log('❌ MARKER LOST');
-        statusText.innerHTML = 'Point camera at the test marker<br>(black and white grid pattern)';
-        statusText.style.color = 'white';
+        arStatus.textContent = 'Point camera at marker';
+        arStatus.style.color = '#FF0000';
     });
     
     // Error handling
     scene.addEventListener('error', function(e) {
         console.error('AR Scene error:', e);
-        statusText.innerHTML = '❌ Error loading AR<br>Try refreshing the page';
-        statusText.style.color = '#FF0000';
+        arStatus.textContent = '❌ AR Error - Refresh page';
+        arStatus.style.color = '#FF0000';
+    });
+    
+    // Hide instructions button
+    document.getElementById('hideInstructions').addEventListener('click', function() {
+        document.getElementById('permanentInstructions').style.display = 'none';
     });
     
     // Add a manual test button
