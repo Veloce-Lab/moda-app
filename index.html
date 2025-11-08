@@ -12,16 +12,15 @@
     <!-- AR Scene -->
     <a-scene 
         vr-mode-ui="enabled: false"
-        arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+        arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono;"
         embedded
         renderer="logarithmicDepthBuffer: true;"
         stats
     >
         
-        <!-- Simple Barcode Marker -->
+        <!-- Using a preset pattern marker instead of barcode -->
         <a-marker 
-            type="barcode" 
-            value="5"
+            preset="hiro"
             raycaster="objects: .clickable"
             emitevents="true"
         >
@@ -40,6 +39,8 @@
                 align="center"
                 scale="2 2 2"
             ></a-text>
+            <a-light type="ambient" color="#CCC"></a-light>
+            <a-light type="directional" intensity="0.5" position="-1 1 2"></a-light>
         </a-marker>
 
         <a-entity camera></a-entity>
@@ -49,7 +50,7 @@
     <div id="loadingScreen">
         <div class="loading-content">
             <h1>Veloce Fashion AR</h1>
-            <p>Point your camera at the test marker to experience AR</p>
+            <p>Point your camera at the Hiro marker to experience AR</p>
             <div class="loader"></div>
             <p id="status">Initializing camera...</p>
         </div>
@@ -59,11 +60,15 @@
     <div id="permanentInstructions">
         <div class="instructions-content">
             <h3>AR Instructions</h3>
-            <p><strong>Step 1:</strong> <a href="assets/images/simple-marker.html" target="_blank" style="color: #FF0000; text-decoration: underline;">Open Test Marker</a></p>
-            <p><strong>Step 2:</strong> Display that page on another device</p>
-            <p><strong>Step 3:</strong> Point this camera at the black/white grid</p>
+            <p><strong>Step 1:</strong> <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank" style="color: #FF0000; text-decoration: underline;">Download Hiro Marker</a></p>
+            <p><strong>Step 2:</strong> Display/print the Hiro marker</p>
+            <p><strong>Step 3:</strong> Point camera at the Hiro marker</p>
             <p><strong>Status:</strong> <span id="arStatus">Waiting for marker...</span></p>
-            <button id="hideInstructions">Hide Instructions</button>
+            <div style="margin-top: 10px;">
+                <button onclick="testVibration()">Test Vibration</button>
+                <button onclick="location.reload()">Refresh AR</button>
+                <button id="hideInstructions">Hide Instructions</button>
+            </div>
         </div>
     </div>
 

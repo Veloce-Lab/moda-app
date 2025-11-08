@@ -61,38 +61,47 @@ body {
     position: fixed;
     top: 10px;
     left: 10px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 15px;
     border-radius: 10px;
     z-index: 999;
-    max-width: 300px;
+    max-width: 320px;
     backdrop-filter: blur(10px);
+    border: 2px solid #FF0000;
 }
 
 .instructions-content h3 {
     margin: 0 0 10px 0;
     color: #FF0000;
+    border-bottom: 1px solid #FF0000;
+    padding-bottom: 5px;
 }
 
 .instructions-content p {
-    margin: 5px 0;
+    margin: 8px 0;
     font-size: 14px;
     line-height: 1.4;
 }
 
-#hideInstructions {
+.instructions-content button {
     background: #FF0000;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
+    margin: 5px 5px 5px 0;
+    font-size: 12px;
+    min-width: 80px;
+}
+
+.instructions-content button:hover {
+    background: #CC0000;
 }
 
 #arStatus {
-    color: #FF0000;
     font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 3px;
 }

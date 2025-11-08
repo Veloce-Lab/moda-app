@@ -1,3 +1,15 @@
+// Vibration test function - must be in global scope
+function testVibration() {
+    console.log('Testing vibration...');
+    if ('vibrate' in navigator) {
+        // Vibrate pattern: vibrate for 200ms, pause 100ms, vibrate 200ms
+        navigator.vibrate([200, 100, 200]);
+        alert('Vibration test activated! You should feel two short vibrations.');
+    } else {
+        alert('Vibration not supported on this device/browser.');
+    }
+}
+
 // Main application logic
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Veloce Fashion AR App Initialized');
@@ -11,34 +23,45 @@ document.addEventListener('DOMContentLoaded', function() {
     statusText.innerHTML = 'Loading AR.js library...';
     arStatus.textContent = 'Loading...';
     
+    let markerFound = false;
+    
     scene.addEventListener('loaded', function() {
         console.log('✅ AR Scene loaded successfully');
         statusText.innerHTML = '✅ AR ready!';
-        arStatus.textContent = 'Ready - Point camera at marker';
-        arStatus.style.color = '#00FF00';
+        arStatus.textContent = 'Ready - Point camera at Hiro marker';
+        arStatus.style.color = '#FFFF00'; // Yellow for ready
         
         setTimeout(() => {
             loadingScreen.style.display = 'none';
-        }, 2000);
+        }, 3000);
     });
     
-    // Marker events
-    const marker = document.querySelector('a-marker');
-    
-    marker.addEventListener('markerFound', function() {
-        console.log('🎯 MARKER FOUND!');
-        arStatus.textContent = '✅ Marker Detected!';
-        arStatus.style.color = '#00FF00';
+    // Marker events - using event delegation for A-Frame
+    scene.addEventListener('markerFound', function(e) {
+        console.log('🎯 MARKER FOUND!', e.target);
+        markerFound = true;
+        arStatus.textContent = '✅ Marker Detected! AR Working!';
+        arStatus.style.color = '#00FF00'; // Green for detected
         
+        // Vibrate when marker found - using proper user gesture context
         if ('vibrate' in navigator) {
-            navigator.vibrate([100, 50, 100]);
+            // Use a simple vibration pattern
+            try {
+                navigator.vibrate(300);
+            } catch (e) {
+                console.log('Vibration failed:', e);
+            }
         }
+        
+        // Add some visual feedback
+        e.target.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 2000');
     });
     
-    marker.addEventListener('markerLost', function() {
-        console.log('❌ MARKER LOST');
-        arStatus.textContent = 'Point camera at marker';
-        arStatus.style.color = '#FF0000';
+    scene.addEventListener('markerLost', function(e) {
+        console.log('❌ MARKER LOST', e.target);
+        markerFound = false;
+        arStatus.textContent = 'Point camera at Hiro marker';
+        arStatus.style.color = '#FF0000'; // Red for lost
     });
     
     // Error handling
@@ -48,31 +71,41 @@ document.addEventListener('DOMContentLoaded', function() {
         arStatus.style.color = '#FF0000';
     });
     
+    // Camera events
+    scene.addEventListener('camera-error', function(e) {
+        console.error('Camera error:', e);
+        arStatus.textContent = '❌ Camera error - Check permissions';
+        arStatus.style.color = '#FF0000';
+    });
+    
     // Hide instructions button
     document.getElementById('hideInstructions').addEventListener('click', function() {
         document.getElementById('permanentInstructions').style.display = 'none';
     });
     
-    // Add a manual test button
-    const testButton = document.createElement('button');
-    testButton.textContent = 'Test Vibration';
-    testButton.style.cssText = `
+    // Add debug info to screen
+    const debugInfo = document.createElement('div');
+    debugInfo.style.cssText = `
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1001;
-        padding: 10px;
-        background: #FF0000;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.7);
         color: white;
-        border: none;
+        padding: 10px;
         border-radius: 5px;
-        cursor: pointer;
+        font-size: 12px;
+        z-index: 1000;
+        max-width: 200px;
     `;
-    testButton.onclick = function() {
-        if ('vibrate' in navigator) {
-            navigator.vibrate(200);
-            alert('Vibration test - if you felt this, haptics work!');
-        }
-    };
-    document.body.appendChild(testButton);
+    debugInfo.innerHTML = `
+        <div>FPS: <span id="fpsCounter">--</span></div>
+        <div>Marker: <span id="markerState">None</span></div>
+        <div>Vibration: <span id="vibrationState">${'vibrate' in navigator ? 'Supported' : 'Not Supported'}</span></div>
+    `;
+    document.body.appendChild(debugInfo);
+    
+    // Update debug info
+    setInterval(() => {
+        document.getElementById('markerState').textContent = markerFound ? 'Detected' : 'Searching';
+    }, 1000);
 });
