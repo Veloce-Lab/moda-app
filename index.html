@@ -12,35 +12,47 @@
     <!-- AR Scene -->
     <a-scene 
         vr-mode-ui="enabled: false"
-        arjs="sourceType: webcam; debugUIEnabled: true;"
+        arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
         embedded
         renderer="logarithmicDepthBuffer: true;"
         stats
     >
-        <!-- Marker for our VELOCE image -->
-        <a-marker 
-            type="pattern" 
-            url="assets/images/pattern-veloce.patt"
-            raycaster="objects: .clickable"
-            cursor="fuse: false; rayOrigin: mouse;"
-        >
-            <!-- 3D Text that will appear over the marker -->
-            <a-text 
-                value="Veloce Fashion" 
-                position="0 0.5 0" 
-                color="#000000"
-                align="center"
-            ></a-text>
-            
-            <!-- Simple 3D Box -->
-            <a-box 
-                position="0 0.2 0" 
-                color="#FF0000" 
-                class="clickable"
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"
-            ></a-box>
-        </a-marker>
         
+        <!-- Barcode Marker 5 - This is the most reliable -->
+        <a-marker 
+            type="barcode" 
+            value="5"
+            raycaster="objects: .clickable"
+            emitevents="true"
+        >
+            <a-box 
+                position="0 0.5 0" 
+                width="1" 
+                height="1" 
+                depth="1" 
+                color="red"
+                animation="property: rotation; to: 360 360 0; loop: true; dur: 2000"
+            ></a-box>
+            <a-text 
+                value="Veloce Fashion AR!" 
+                position="0 1.5 0" 
+                color="black" 
+                align="center"
+                scale="2 2 2"
+            ></a-text>
+        </a-marker>
+
+        <!-- Additional barcode markers for testing -->
+        <a-marker type="barcode" value="0">
+            <a-box position="0 0.5 0" color="blue" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"></a-box>
+            <a-text value="Marker 0" position="0 1.5 0" color="white"></a-text>
+        </a-marker>
+
+        <a-marker type="barcode" value="1">
+            <a-box position="0 0.5 0" color="green" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"></a-box>
+            <a-text value="Marker 1" position="0 1.5 0" color="white"></a-text>
+        </a-marker>
+
         <a-entity camera></a-entity>
     </a-scene>
 
@@ -48,13 +60,19 @@
     <div id="loadingScreen">
         <div class="loading-content">
             <h1>Veloce Fashion AR</h1>
-            <p>Point your camera at Veloce artwork to experience augmented reality</p>
+            <p>Point your camera at a barcode marker to experience AR</p>
+            <p><strong>Use marker 5 (red box) for best results</strong></p>
             <div class="loader"></div>
             <p id="status">Initializing camera...</p>
+            <div id="markerInstructions" style="margin-top: 20px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                <p><strong>Download these markers:</strong></p>
+                <p>Marker 5: <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/barcode-marker-5.png" style="color: #FF0000;">Download Here</a></p>
+                <p>Marker 0: <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/barcode-marker-0.png" style="color: #FF0000;">Download Here</a></p>
+                <p>Marker 1: <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/barcode-marker-1.png" style="color: #FF0000;">Download Here</a></p>
+            </div>
         </div>
     </div>
 
-    <script src="js/ar-handler.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
