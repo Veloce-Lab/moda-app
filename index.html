@@ -18,7 +18,7 @@
         stats
     >
         
-        <!-- Barcode Marker 5 - This is the most reliable -->
+        <!-- Simple Barcode Marker -->
         <a-marker 
             type="barcode" 
             value="5"
@@ -34,23 +34,12 @@
                 animation="property: rotation; to: 360 360 0; loop: true; dur: 2000"
             ></a-box>
             <a-text 
-                value="Veloce Fashion AR!" 
+                value="Veloce AR Works!" 
                 position="0 1.5 0" 
                 color="black" 
                 align="center"
                 scale="2 2 2"
             ></a-text>
-        </a-marker>
-
-        <!-- Additional barcode markers for testing -->
-        <a-marker type="barcode" value="0">
-            <a-box position="0 0.5 0" color="blue" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"></a-box>
-            <a-text value="Marker 0" position="0 1.5 0" color="white"></a-text>
-        </a-marker>
-
-        <a-marker type="barcode" value="1">
-            <a-box position="0 0.5 0" color="green" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"></a-box>
-            <a-text value="Marker 1" position="0 1.5 0" color="white"></a-text>
         </a-marker>
 
         <a-entity camera></a-entity>
@@ -60,15 +49,14 @@
     <div id="loadingScreen">
         <div class="loading-content">
             <h1>Veloce Fashion AR</h1>
-            <p>Point your camera at a barcode marker to experience AR</p>
-            <p><strong>Use marker 5 (red box) for best results</strong></p>
+            <p>Point your camera at the test marker to experience AR</p>
             <div class="loader"></div>
             <p id="status">Initializing camera...</p>
             <div id="markerInstructions" style="margin-top: 20px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
-                <p><strong>Download these markers:</strong></p>
-                <p>Marker 5: <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/barcode-marker-5.png" style="color: #FF0000;">Download Here</a></p>
-                <p>Marker 0: <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/barcode-marker-0.png" style="color: #FF0000;">Download Here</a></p>
-                <p>Marker 1: <a href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/barcode-marker-1.png" style="color: #FF0000;">Download Here</a></p>
+                <p><strong>Test Marker URLs:</strong></p>
+                <p>1. <a href="assets/images/simple-marker.html" style="color: #FF0000;" target="_blank">Open Simple Test Marker</a></p>
+                <p>2. Display that page on another device</p>
+                <p>3. Point this AR app at the black/white grid</p>
             </div>
         </div>
     </div>

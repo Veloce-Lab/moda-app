@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test Marker</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .marker {
+            width: 400px;
+            height: 400px;
+            border: 5px solid #000;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            margin: 20px 0;
+        }
+        .cell { border: 2px solid #000; }
+        .black { background: #000; }
+        .white { background: #fff; }
+    </style>
+</head>
+<body>
+    <h1>Veloce AR Test Marker</h1>
+    <p>Display this page on another device and point your AR app at it</p>
+    
+    <div class="marker">
+        <div class="cell black"></div>
+        <div class="cell white"></div>
+        <div class="cell black"></div>
+        <div class="cell white"></div>
+        <div class="cell black"></div>
+        <div class="cell white"></div>
+        <div class="cell black"></div>
+        <div class="cell white"></div>
+        <div class="cell black"></div>
+    </div>
+    
+    <p>You should see a rotating red box when detected</p>
+</body>
+</html>
