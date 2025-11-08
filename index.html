@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veloce Fashion AR Experience</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- AR Scene -->
+    <a-scene 
+        vr-mode-ui="enabled: false"
+        arjs="sourceType: webcam; debugUIEnabled: false;"
+        embedded
+        renderer="logarithmicDepthBuffer: true;"
+    >
+        <!-- Marker for our VELOCE image -->
+        <a-marker 
+            type="pattern" 
+            url="assets/images/pattern-veloce.patt"
+            raycaster="objects: .clickable"
+            cursor="fuse: false; rayOrigin: mouse;"
+        >
+            <!-- 3D Text that will appear over the marker -->
+            <a-text 
+                value="Veloce Fashion" 
+                position="0 0.5 0" 
+                color="#000000"
+                align="center"
+            ></a-text>
+            
+            <!-- Simple 3D Box -->
+            <a-box 
+                position="0 0.2 0" 
+                color="#FF0000" 
+                class="clickable"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000"
+            ></a-box>
+        </a-marker>
+        
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <h1>Veloce Fashion AR</h1>
+            <p>Point your camera at Veloce artwork to experience augmented reality</p>
+            <div class="loader"></div>
+            <p id="status">Initializing camera...</p>
+        </div>
+    </div>
+
+    <script src="js/ar-handler.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
